@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendaftaran Panitia Donor Darah — Kurma An-Nahl</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Konfigurasi Tema Warna & Tipografi -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cream: '#FAF9F6',
+            blood: {
+              50: '#FEF2F2',
+              100: '#FEE2E2',
+              200: '#FECACA',
+              300: '#FCA5A5',
+              500: '#EF4444',
+              600: '#DC2626',
+              700: '#B91C1C',
+              800: '#991B1B',
+              900: '#7F1D1D',
+            },
+            annahl: {
+              50: '#ECFDF5',
+              100: '#D1FAE5',
+              200: '#A7F3D0',
+              300: '#6EE7B7',
+              500: '#10B981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065F46',
+              900: '#064E3B',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-up {
+      animation: fadeSlideUp 0.28s ease-out forwards;
+    }
+
+    /* Scrollbar halus untuk modal pengaturan admin */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF9F6] text-slate-800 font-sans antialiased selection:bg-blood-600 selection:text-white min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- =====================================================================
+       HEADER: IDENTITAS HUMANITARIAN & ISLAMI KURMA AN-NAHL
+  ====================================================================== -->
+  <header class="relative bg-gradient-to-br from-[#991B1B] via-[#DC2626] to-[#7F1D1D] text-white overflow-hidden shadow-md">
+    <!-- Pola Geometri Islami Halus (SVG Pattern) -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="islamic-geo" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M30 4 L36.5 23.5 L56 30 L36.5 36.5 L30 56 L23.5 36.5 L4 30 L23.5 23.5 Z" fill="none" stroke="currentColor" stroke-width="1.1" />
+            <circle cx="30" cy="30" r="7" fill="none" stroke="currentColor" stroke-width="0.9" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#islamic-geo)" />
+      </svg>
+    </div>
+
+    <!-- Aksen Cahaya Hijau Zamrud -->
+    <div class="absolute -bottom-20 -right-16 w-72 h-72 bg-annahl-600/30 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-[680px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <!-- Lencana Status Pendaftaran -->
+      <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/25 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ring-4 ring-emerald-400/25"></span>
+        <span>Open Recruitment Panitia</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
+        <!-- Emblem Kustom SVG Tetesan Darah & Hati -->
+        <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-white shadow-lg flex items-center justify-center shrink-0 border-2 border-annahl-500/40">
+          <svg class="w-11 h-11 sm:w-12 sm:h-12" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Donor Darah Kurma An-Nahl">
+            <!-- Tetesan Darah Crimson -->
+            <path d="M32 6C32 6 14 25.5 14 39C14 48.9411 22.0589 57 32 57C41.9411 57 50 48.9411 50 39C50 25.5 32 6 32 6Z" fill="#DC2626" />
+            <!-- Kilau Halus -->
+            <path d="M21 38C21 31.5 25.5 23.5 28.5 19.5" stroke="#FCA5A5" stroke-width="2.5" stroke-linecap="round" />
+            <!-- Hati Kemanusiaan Putih -->
+            <path d="M32 46.5C32 46.5 22.5 40.2 22.5 34.2C22.5 31.3 24.7 29.2 27.4 29.2C29.2 29.2 30.9 30.1 32 31.5C33.1 30.1 34.8 29.2 36.6 29.2C39.3 29.2 41.5 31.3 41.5 34.2C41.5 40.2 32 46.5 32 46.5Z" fill="#FFFFFF" />
+            <!-- Lencana Hijau Zamrud Annahl -->
+            <circle cx="46" cy="17" r="7.5" fill="#059669" stroke="#FFFFFF" stroke-width="2" />
+            <path d="M46 13.5V20.5M42.5 17H49.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <div class="space-y-1">
+          <h1 class="text-xl sm:text-3xl font-extrabold tracking-tight leading-snug">
+            Pendaftaran Panitia Donor Darah — Kurma An-Nahl
+          </h1>
+          <p class="text-red-100 text-xs sm:text-sm font-medium">
+            Setetes Darah Anda, Harapan Hidup Bagi Sesama
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       KONTEN UTAMA: LAYOUT TUNGGAL FOKUS (MAX-WIDTH 680PX)
+  ====================================================================== -->
+  <main class="flex-1 w-full max-w-[680px] mx-auto px-4 sm:px-6 py-6 sm:py-9">
+
+    <!-- ===================================================================
+         KARTU FORMULIR PENDAFTARAN (6 POIN WAJIB)
+    ==================================================================== -->
+    <section id="form-section" class="bg-white rounded-3xl shadow-sm border border-slate-200/90 overflow-hidden animate-fade-up">
+      <!-- Header Kartu -->
+      <div class="px-5 sm:px-8 py-5 bg-slate-50/80 border-b border-slate-200/80 flex items-center justify-between gap-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900">Formulir Kepanitiaan</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Lengkapi seluruh 6 bagian di bawah ini dengan data yang benar.</p>
+        </div>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-annahl-800 bg-annahl-50 border border-annahl-200 px-3 py-1.5 rounded-xl shrink-0">
+          <span class="w-2 h-2 rounded-full bg-annahl-600"></span>
+          <span>6 Poin Wajib</span>
+        </span>
+      </div>
+
+      <form id="registration-form" novalidate class="p-5 sm:p-8 space-y-7">
+        <!-- 1. Nama Lengkap -->
+        <div>
+          <label for="namaLengkap" class="flex items-center gap-2.5 text-sm font-bold text-slate-800 mb-2">
+            <span class="w-6 h-6 rounded-lg bg-blood-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0">1</span>
+            <span>1. Nama Lengkap <span class="text-blood-600">*</span></span>
+          </label>
+          <input
+            type="text"
+            id="namaLengkap"
+            name="namaLengkap"
+            required
+            autocomplete="name"
+            placeholder="Masukkan nama lengkap Anda"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blood-500/25 focus:border-blood-600 transition"
+          />
+          <p id="err-namaLengkap" class="hidden text-xs font-semibold text-blood-600 mt-1.5">
+            Nama lengkap wajib diisi.
+          </p>
+        </div>
+
+        <!-- 2. Nomor WhatsApp -->
+        <div>
+          <label for="nomorWhatsApp" class="flex items-center gap-2.5 text-sm font-bold text-slate-800 mb-2">
+            <span class="w-6 h-6 rounded-lg bg-blood-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0">2</span>
+            <span>2. Nomor WhatsApp <span class="text-blood-600">*</span></span>
+          </label>
+          <input
+            type="tel"
+            id="nomorWhatsApp"
+            name="nomorWhatsApp"
+            inputmode="numeric"
+            required
+            autocomplete="tel"
+            placeholder="Contoh: 081234567890"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-mono text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blood-500/25 focus:border-blood-600 transition"
+          />
+          <p id="err-nomorWhatsApp" class="hidden text-xs font-semibold text-blood-600 mt-1.5">
+            Masukkan nomor WhatsApp Indonesia yang valid (contoh: 081234567890 atau 6281234567890).
+          </p>
+        </div>
+
+        <!-- 3. Departemen Di Kurma An-Nahl -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-annahl-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0">3</span>
+            <label class="text-sm font-bold text-slate-800">
+              3. Departemen Di Kurma An-Nahl <span class="text-blood-600">*</span>
+            </label>
+          </div>
+
+          <div id="departemen-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Diisi otomatis via JavaScript -->
+          </div>
+          <p id="err-departemen" class="hidden text-xs font-semibold text-blood-600">
+            Silakan pilih salah satu Departemen Di Kurma An-Nahl.
+          </p>
+        </div>
+
+        <!-- 4. Pilihan Jobdesc yang dipilih -->
+        <div class="space-y-3">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-blood-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">4</span>
+            <div>
+              <label class="text-sm font-bold text-slate-800">
+                4. Pilihan Jobdesc yang dipilih <span class="text-blood-600">*</span>
+              </label>
+              <p class="text-xs text-slate-500 mt-0.5">Pilih satu bidang tugas kepanitiaan di bawah ini.</p>
+            </div>
+          </div>
+
+          <div id="jobdesc-list" class="grid grid-cols-1 gap-2.5">
+            <!-- Diisi otomatis via JavaScript -->
+          </div>
+          <p id="err-jobdesc" class="hidden text-xs font-semibold text-blood-600">
+            Silakan pilih salah satu Jobdesc yang diinginkan.
+          </p>
+        </div>
+
+        <!-- 5. Kesediaan Rapat Briefing -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-annahl-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0">5</span>
+            <label class="text-sm font-bold text-slate-800">
+              5. Kesediaan Rapat Briefing <span class="text-blood-600">*</span>
+            </label>
+          </div>
+
+          <!-- Callout Aturan Rapat Briefing -->
+          <div class="rounded-2xl bg-amber-50/90 border border-amber-200 p-4 space-y-3.5">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed">
+                Apabila tidak hadir pada kegiatan Rapat Briefing, maka panitia berhak memindahkan atau mengalihkan JOB yang telah dipilih kepada peserta lain
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <label class="cursor-pointer block">
+                <input type="radio" name="briefing" value="a. Setuju" class="peer sr-only" />
+                <div class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-white px-4 py-3.5 text-sm font-bold text-slate-700 hover:border-annahl-300 peer-checked:border-annahl-600 peer-checked:bg-annahl-50 peer-checked:text-annahl-900 transition">
+                  <span class="w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0 radio-ring">
+                    <span class="w-2 h-2 rounded-full bg-annahl-600 opacity-0 transition-opacity radio-dot"></span>
+                  </span>
+                  <span>a. Setuju</span>
+                </div>
+              </label>
+
+              <label class="cursor-pointer block">
+                <input type="radio" name="briefing" value="b. Kurang Setuju" class="peer sr-only" />
+                <div class="flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-white px-4 py-3.5 text-sm font-bold text-slate-700 hover:border-blood-300 peer-checked:border-blood-600 peer-checked:bg-blood-50 peer-checked:text-blood-900 transition">
+                  <span class="w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0 radio-ring">
+                    <span class="w-2 h-2 rounded-full bg-blood-600 opacity-0 transition-opacity radio-dot"></span>
+                  </span>
+                  <span>b. Kurang Setuju</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <p id="err-briefing" class="hidden text-xs font-semibold text-blood-600">
+            Silakan pilih pernyataan kesediaan Rapat Briefing.
+          </p>
+        </div>
+
+        <!-- 6. Kehadiran Sampai Jam Berapa -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-blood-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0">6</span>
+            <label class="text-sm font-bold text-slate-800">
+              6. Kehadiran Sampai Jam Berapa <span class="text-blood-600">*</span>
+            </label>
+          </div>
+
+          <div id="kehadiran-list" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <!-- Diisi otomatis via JavaScript -->
+          </div>
+          <p id="err-kehadiran" class="hidden text-xs font-semibold text-blood-600">
+            Silakan pilih jadwal kehadiran Anda.
+          </p>
+        </div>
+
+        <!-- Tombol Kirim Pendaftaran -->
+        <div class="pt-3 border-t border-slate-200/90">
+          <button
+            type="submit"
+            id="btn-submit"
+            class="w-full inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-blood-600 to-blood-700 hover:from-blood-700 hover:to-blood-800 text-white font-bold text-sm sm:text-base px-6 py-4 rounded-2xl shadow-md hover:shadow-lg transition-all cursor-pointer disabled:opacity-65 disabled:cursor-not-allowed"
+          >
+            <svg id="submit-icon" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <svg id="submit-spinner" class="hidden animate-spin w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            <span id="submit-text">Kirim Pendaftaran</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===================================================================
+         KARTU KONFIRMASI BERHASIL (HANYA BUKTI MILIK PENDAFTAR SENDIRI)
+    ==================================================================== -->
+    <section id="receipt-section" class="hidden bg-white rounded-3xl shadow-md border border-annahl-200 overflow-hidden animate-fade-up">
+      <div class="bg-gradient-to-br from-annahl-600 to-annahl-800 text-white px-6 py-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-white text-annahl-600 mx-auto flex items-center justify-center shadow-lg mb-3.5">
+          <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">Pendaftaran Berhasil Terkirim!</h2>
+        <p class="text-emerald-100 text-xs sm:text-sm mt-1.5 max-w-md mx-auto">
+          Jazakumullahu khairan telah mendaftar sebagai Panitia Donor Darah — Kurma An-Nahl.
+        </p>
+      </div>
+
+      <div class="p-5 sm:p-8 space-y-6">
+        <!-- Kode Registrasi & Waktu Daftar -->
+        <div class="bg-[#FAF9F6] border-2 border-dashed border-slate-300 rounded-2xl p-5 text-center">
+          <p class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Kode Registrasi Anda</p>
+          <p id="rec-code" class="text-2xl sm:text-3xl font-extrabold font-mono text-blood-600 mt-1 select-all">
+            KRM-0000
+          </p>
+          <p id="rec-time" class="text-xs font-mono text-slate-500 mt-1.5">-</p>
+          <div id="rec-mode-note" class="hidden mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold bg-amber-100 text-amber-900 px-3 py-1 rounded-full">
+            <span>Mode Pratinjau: URL Apps Script belum dipasang di Pengaturan Admin</span>
+          </div>
+        </div>
+
+        <!-- Ringkasan 6 Jawaban Pendaftar -->
+        <div class="rounded-2xl border border-slate-200 divide-y divide-slate-100 text-xs sm:text-sm">
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 px-4 py-3">
+            <span class="text-slate-500 font-medium">1. Nama Lengkap</span>
+            <span id="rec-nama" class="font-bold text-slate-900 sm:text-right">-</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 px-4 py-3">
+            <span class="text-slate-500 font-medium">2. Nomor WhatsApp</span>
+            <span id="rec-wa" class="font-mono font-bold text-slate-900 sm:text-right">-</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 px-4 py-3">
+            <span class="text-slate-500 font-medium">3. Departemen Di Kurma An-Nahl</span>
+            <span id="rec-dept" class="font-bold text-annahl-700 sm:text-right">-</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 px-4 py-3">
+            <span class="text-slate-500 font-medium">4. Pilihan Jobdesc</span>
+            <span id="rec-job" class="font-bold text-blood-600 sm:text-right">-</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 px-4 py-3">
+            <span class="text-slate-500 font-medium">5. Kesediaan Rapat Briefing</span>
+            <span id="rec-briefing" class="font-bold text-slate-900 sm:text-right">-</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-1 px-4 py-3">
+            <span class="text-slate-500 font-medium">6. Kehadiran Sampai Jam Berapa</span>
+            <span id="rec-kehadiran" class="font-bold text-slate-900 sm:text-right">-</span>
+          </div>
+        </div>
+
+        <!-- Tombol Aksi Bukti Pendaftaran -->
+        <div class="space-y-2.5">
+          <button
+            type="button"
+            onclick="copyReceipt()"
+            class="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-4 py-3.5 rounded-2xl shadow-sm transition cursor-pointer"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span>Salin Bukti Pendaftaran</span>
+          </button>
+
+          <a
+            id="btn-wa-admin"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-annahl-600 hover:bg-annahl-700 text-white font-bold text-xs sm:text-sm px-4 py-3.5 rounded-2xl shadow-sm transition"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+            </svg>
+            <span>Konfirmasi ke WhatsApp Admin</span>
+          </a>
+
+          <button
+            type="button"
+            onclick="resetToNewRegistration()"
+            class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm px-4 py-3.5 rounded-2xl transition cursor-pointer"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Isi Pendaftaran Baru</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       FOOTER MINIMALIS + LINK DISCREET PENGATURAN ADMIN
+  ====================================================================== -->
+  <footer class="border-t border-slate-200/80 bg-white/80 mt-auto">
+    <div class="max-w-[680px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-500">
+      <p class="font-medium text-slate-600">Kurma An-Nahl — Panitia Donor Darah</p>
+
+      <button
+        type="button"
+        onclick="openAdminModal()"
+        class="inline-flex items-center gap-1.5 text-slate-400 hover:text-slate-700 font-medium transition cursor-pointer py-1 px-2 rounded-lg hover:bg-slate-100"
+      >
+        <span>&#9881;&#65039; Pengaturan Admin</span>
+        <span id="footer-status-dot" class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       MODAL PENGATURAN ADMIN (TERSEMBUNYI, KHUSUS PANITIA / PENYELENGGARA)
+  ====================================================================== -->
+  <div id="admin-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto animate-fade-up">
+      <!-- Header Modal -->
+      <div class="px-5 sm:px-7 py-4 bg-slate-900 text-white flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="text-base">&#9881;&#65039;</span>
+          <div>
+            <h3 class="text-sm sm:text-base font-extrabold">Pengaturan Admin — Koneksi Google Sheets</h3>
+            <p class="text-[11px] text-slate-400">Khusus penyelenggara Kurma An-Nahl (tidak terlihat oleh pendaftar)</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="closeAdminModal()"
+          aria-label="Tutup modal"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Isi Modal -->
+      <div class="p-5 sm:p-7 space-y-6 max-h-[82vh] overflow-y-auto">
+        <!-- 1. Pintasan Langsung ke Google Sheets Hasil -->
+        <div class="rounded-2xl bg-annahl-50 border border-annahl-200 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-extrabold text-annahl-900">Google Spreadsheet Hasil Pendaftaran</p>
+            <p class="text-[11px] font-mono text-annahl-800 mt-0.5 break-all">
+              ID: 1NNJ2uT0nOkQlN_tIfF6D0AhJdhLvs2lDHkyfhkzT3J8
+            </p>
+          </div>
+          <a
+            href="https://docs.google.com/spreadsheets/d/1NNJ2uT0nOkQlN_tIfF6D0AhJdhLvs2lDHkyfhkzT3J8/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-1.5 bg-annahl-600 hover:bg-annahl-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-sm transition shrink-0"
+          >
+            <span>Buka Google Sheets Hasil &#8599;</span>
+          </a>
+        </div>
+
+        <!-- 2. Input & Aksi URL Web App Google Apps Script -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <label for="admin-script-url" class="text-xs sm:text-sm font-bold text-slate-800">
+              URL Google Apps Script Web App (<code class="font-mono text-xs">/exec</code>)
+            </label>
+            <span id="admin-status-badge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">
+              Belum Terpasang
+            </span>
+          </div>
+
+          <input
+            type="url"
+            id="admin-script-url"
+            placeholder="https://script.google.com/macros/s/AKfycbx.../exec"
+            class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-xs sm:text-sm font-mono text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-annahl-500/30 focus:border-annahl-600"
+          />
+
+          <div class="flex flex-wrap items-center gap-2.5 pt-1">
+            <button
+              type="button"
+              onclick="saveAdminScriptUrl()"
+              class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition cursor-pointer"
+            >
+              <span>Simpan URL</span>
+            </button>
+
+            <button
+              type="button"
+              id="btn-admin-test"
+              onclick="sendTestRowToSheet()"
+              class="inline-flex items-center gap-1.5 bg-annahl-600 hover:bg-annahl-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-sm transition cursor-pointer"
+            >
+              <span>Kirim Data Tes ke Google Sheets</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="copyShareableFormLink()"
+              class="inline-flex items-center gap-1.5 bg-blood-50 hover:bg-blood-100 text-blood-800 border border-blood-200 text-xs font-bold px-4 py-2.5 rounded-xl transition cursor-pointer"
+            >
+              <span>Salin Link Form (Siap Sebar ke WA)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Panduan 4 Langkah Singkat -->
+        <div class="space-y-2.5">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Panduan 4 Langkah Menghubungkan ke Sheet</h4>
+          <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-700">
+            <li class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+              <strong class="text-blood-600">1.</strong> Buka Google Sheet di atas, lalu klik menu <strong>Ekstensi &rarr; Apps Script</strong>.
+            </li>
+            <li class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+              <strong class="text-blood-600">2.</strong> Hapus isi editor bawaan, tempel kode <strong>Code.gs</strong> di bawah, lalu klik <strong>Simpan</strong>.
+            </li>
+            <li class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+              <strong class="text-blood-600">3.</strong> Klik <strong>Terapkan &rarr; Deployment baru</strong>, pilih jenis <strong>Aplikasi Web</strong>.
+            </li>
+            <li class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+              <strong class="text-annahl-700">4.</strong> Pada akses pilih <strong>Siapa saja (Anyone)</strong>, salin URL <code class="font-mono">/exec</code> lalu tempel di atas.
+            </li>
+          </ol>
+        </div>
+
+        <!-- 4. Kode Google Apps Script Siap Salin -->
+        <div class="rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden">
+          <div class="px-4 py-2.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-2">
+            <span class="text-xs font-mono font-bold text-slate-300">Code.gs (Sheet: Pendaftar Panitia)</span>
+            <button
+              type="button"
+              onclick="copyCodeGs()"
+              class="inline-flex items-center gap-1.5 bg-annahl-600 hover:bg-annahl-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition cursor-pointer"
+            >
+              <span id="copy-gs-label">Salin Kode Code.gs</span>
+            </button>
+          </div>
+          <pre class="p-4 overflow-x-auto text-[11px] sm:text-xs leading-relaxed font-mono text-emerald-300"><code id="code-gs-block">var SPREADSHEET_ID = "1NNJ2uT0nOkQlN_tIfF6D0AhJdhLvs2lDHkyfhkzT3J8";
+var SHEET_NAME = "Pendaftar Panitia";
+
+function doPost(e) {
+  var lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+
+  try {
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName(SHEET_NAME);
+
+    if (!sheet) {
+      sheet = ss.insertSheet(SHEET_NAME);
+    }
+
+    var headers = [
+      "Waktu Daftar",
+      "Kode Registrasi",
+      "1. Nama Lengkap",
+      "2. Nomor WhatsApp",
+      "3. Departemen Di Kurma An-Nahl",
+      "4. Pilihan Jobdesc",
+      "5. Kesediaan Rapat Briefing",
+      "6. Kehadiran Sampai Jam Berapa"
+    ];
+
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(headers);
+      var headerRange = sheet.getRange(1, 1, 1, headers.length);
+      headerRange.setBackground("#059669");
+      headerRange.setFontColor("#FFFFFF");
+      headerRange.setFontWeight("bold");
+      headerRange.setVerticalAlignment("middle");
+      sheet.setRowHeight(1, 32);
+      sheet.setFrozenRows(1);
+    }
+
+    var raw = e.postData ? e.postData.contents : "{}";
+    var data = JSON.parse(raw);
+
+    var row = [
+      data["Waktu Daftar"] || new Date().toLocaleString("id-ID"),
+      data["Kode Registrasi"] || "-",
+      data["1. Nama Lengkap"] || "-",
+      "'" + (data["2. Nomor WhatsApp"] || "-"),
+      data["3. Departemen Di Kurma An-Nahl"] || "-",
+      data["4. Pilihan Jobdesc"] || "-",
+      data["5. Kesediaan Rapat Briefing"] || "-",
+      data["6. Kehadiran Sampai Jam Berapa"] || "-"
+    ];
+
+    sheet.appendRow(row);
+    sheet.autoResizeColumns(1, headers.length);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "success" }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function doGet(e) {
+  return ContentService
+    .createTextOutput("Web App Pendaftaran Panitia Donor Darah Kurma An-Nahl Aktif.")
+    .setMimeType(ContentService.MimeType.TEXT);
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       TOAST NOTIFICATION
+  ====================================================================== -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-[calc(100vw-2.5rem)] pointer-events-none"></div>
+
+  <!-- =====================================================================
+       JAVASCRIPT: LOGIKA FORMULIR & INTEGRASI LANGSUNG KE GOOGLE SHEETS
+  ====================================================================== -->
+  <script>
+    // =========================================================================
+    // KONFIGURASI DEFAULT APPS SCRIPT WEB APP URL
+    // =========================================================================
+    // Tempelkan URL Web App (/exec) di bawah ini jika ingin langsung tertanam permanen di file:
+    const DEFAULT_SCRIPT_URL = "";
+
+    const STORAGE_KEY_SCRIPT_URL = "kurma_annahl_script_url_v5";
+
+    // Poin 3: Departemen Di Kurma An-Nahl
+    const DEPARTEMEN_OPTIONS = [
+      "A. Muda",
+      "B. Rekre",
+      "C. PSDM",
+      "D. BPH",
+      "E. EKSTERNAL (LUAR KEPENGURUSAN KURMA)"
+    ];
+
+    // Poin 4: Pilihan Jobdesc yang dipilih
+    const JOBDESC_OPTIONS = [
+      {
+        value: "a. REGISTRASI",
+        hint: "Pendataan dan verifikasi kehadiran calon pendonor di meja registrasi"
+      },
+      {
+        value: "b. PENGARAH",
+        hint: "Mengatur alur antrean dan mengarahkan peserta selama acara berlangsung"
+      },
+      {
+        value: "c. KONSUMSI",
+        hint: "Menyiapkan dan mendistribusikan konsumsi bagi pendonor serta panitia"
+      },
+      {
+        value: "d. DOKUMENTASI",
+        hint: "Mengabadikan foto, video, dan publikasi dokumentasi kegiatan"
+      },
+      {
+        value: "e. MEDIS",
+        hint: "Mendampingi proses screening kesehatan dan koordinasi tim medis PMI"
+      },
+      {
+        value: "f. RESEARCHER",
+        hint: "Melakukan survei peserta, evaluasi kegiatan, dan observasi lapangan"
+      },
+      {
+        value: "g. INPUT DATA",
+        hint: "Mencatat data digital dan merekapitulasi hasil donor darah"
+      }
+    ];
+
+    // Poin 6: Kehadiran Sampai Jam Berapa
+    const KEHADIRAN_OPTIONS = [
+      { value: "a. FULL TIME", desc: "Awal hingga selesai" },
+      { value: "b. 06:00 - 10:00 WIB", desc: "Sesi Pagi" },
+      { value: "c. 10:00 - 12:00 WIB", desc: "Sesi Siang" }
+    ];
+
+    let currentReceipt = null;
+
+    // =========================================================================
+    // INISIALISASI HALAMAN
+    // =========================================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      syncScriptUrlFromQueryParam();
+      renderRadioCards();
+      updateAdminStatusIndicators();
+      bindFormHandler();
+    });
+
+    // Resolusi URL Apps Script dari ?scriptUrl=..., localStorage, atau DEFAULT_SCRIPT_URL
+    function syncScriptUrlFromQueryParam() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const paramUrl = (params.get("scriptUrl") || "").trim();
+        if (paramUrl && paramUrl.startsWith("https://script.google.com/")) {
+          localStorage.setItem(STORAGE_KEY_SCRIPT_URL, paramUrl);
+        }
+      } catch (err) {
+        console.warn("Gagal membaca parameter URL:", err);
+      }
+    }
+
+    function resolveScriptUrl() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const paramUrl = (params.get("scriptUrl") || "").trim();
+        if (paramUrl && paramUrl.startsWith("https://script.google.com/")) {
+          return paramUrl;
+        }
+      } catch (_) {}
+
+      const saved = (localStorage.getItem(STORAGE_KEY_SCRIPT_URL) || "").trim();
+      if (saved) return saved;
+
+      return (DEFAULT_SCRIPT_URL || "").trim();
+    }
+
+    // =========================================================================
+    // RENDER PILIHAN KARTU INTERAKTIF (POIN 3, 4, 6)
+    // =========================================================================
+    function renderRadioCards() {
+      const deptWrap = document.getElementById("departemen-list");
+      deptWrap.innerHTML = DEPARTEMEN_OPTIONS.map((dept) => `
+        <label class="cursor-pointer block">
+          <input type="radio" name="departemen" value="${escapeHtml(dept)}" class="peer sr-only" />
+          <div class="h-full flex items-center gap-3 rounded-xl border-2 border-slate-200 bg-white px-4 py-3.5 text-xs sm:text-sm font-bold text-slate-700 hover:border-annahl-300 peer-checked:border-annahl-600 peer-checked:bg-annahl-50/70 peer-checked:text-annahl-900 transition">
+            <span class="w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0 radio-ring">
+              <span class="w-2 h-2 rounded-full bg-annahl-600 opacity-0 transition-opacity radio-dot"></span>
+            </span>
+            <span class="leading-snug">${escapeHtml(dept)}</span>
+          </div>
+        </label>
+      `).join("");
+
+      const jobWrap = document.getElementById("jobdesc-list");
+      jobWrap.innerHTML = JOBDESC_OPTIONS.map((job) => `
+        <label class="cursor-pointer block">
+          <input type="radio" name="jobdesc" value="${escapeHtml(job.value)}" class="peer sr-only" />
+          <div class="flex items-start gap-3.5 rounded-xl border-2 border-slate-200 bg-white p-3.5 sm:p-4 hover:border-blood-300 peer-checked:border-blood-600 peer-checked:bg-blood-50/50 transition">
+            <span class="w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0 mt-0.5 radio-ring">
+              <span class="w-2 h-2 rounded-full bg-blood-600 opacity-0 transition-opacity radio-dot"></span>
+            </span>
+            <div class="min-w-0">
+              <span class="block text-sm font-extrabold text-slate-900">${escapeHtml(job.value)}</span>
+              <span class="block text-xs text-slate-500 mt-0.5 leading-relaxed">${escapeHtml(job.hint)}</span>
+            </div>
+          </div>
+        </label>
+      `).join("");
+
+      const hadirWrap = document.getElementById("kehadiran-list");
+      hadirWrap.innerHTML = KEHADIRAN_OPTIONS.map((item) => `
+        <label class="cursor-pointer block">
+          <input type="radio" name="kehadiran" value="${escapeHtml(item.value)}" class="peer sr-only" />
+          <div class="h-full flex items-start gap-3 rounded-xl border-2 border-slate-200 bg-white p-3.5 hover:border-blood-300 peer-checked:border-blood-600 peer-checked:bg-blood-50/50 transition">
+            <span class="w-4 h-4 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0 mt-0.5 radio-ring">
+              <span class="w-2 h-2 rounded-full bg-blood-600 opacity-0 transition-opacity radio-dot"></span>
+            </span>
+            <div>
+              <span class="block text-xs sm:text-sm font-extrabold text-slate-900">${escapeHtml(item.value)}</span>
+              <span class="block text-[11px] text-slate-500 mt-0.5">${escapeHtml(item.desc)}</span>
+            </div>
+          </div>
+        </label>
+      `).join("");
+
+      document.querySelectorAll('#registration-form input[type="radio"]').forEach((el) => {
+        el.addEventListener("change", updateRadioVisualDots);
+      });
+    }
+
+    function updateRadioVisualDots() {
+      document.querySelectorAll("#registration-form label").forEach((lbl) => {
+        const input = lbl.querySelector('input[type="radio"]');
+        const dot = lbl.querySelector(".radio-dot");
+        const ring = lbl.querySelector(".radio-ring");
+        if (!input || !dot || !ring) return;
+
+        if (input.checked) {
+          dot.classList.remove("opacity-0");
+          const isEmerald = input.name === "departemen" || (input.name === "briefing" && input.value === "a. Setuju");
+          ring.classList.add(isEmerald ? "border-annahl-600" : "border-blood-600");
+        } else {
+          dot.classList.add("opacity-0");
+          ring.classList.remove("border-annahl-600", "border-blood-600");
+        }
+      });
+    }
+
+    // =========================================================================
+    // VALIDASI & PENGIRIMAN FORMULIR LANGSUNG KE GOOGLE SHEETS
+    // =========================================================================
+    function bindFormHandler() {
+      const form = document.getElementById("registration-form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Sembunyikan pesan error sebelumnya
+        ["namaLengkap", "nomorWhatsApp", "departemen", "jobdesc", "briefing", "kehadiran"].forEach((id) => {
+          const errEl = document.getElementById(`err-${id}`);
+          if (errEl) errEl.classList.add("hidden");
+        });
+
+        const namaLengkap = document.getElementById("namaLengkap").value.trim();
+        const rawWa = document.getElementById("nomorWhatsApp").value.trim();
+        const cleanWa = rawWa.replace(/[\s\-()]/g, "");
+        const departemen = form.querySelector('input[name="departemen"]:checked')?.value || "";
+        const jobdesc = form.querySelector('input[name="jobdesc"]:checked')?.value || "";
+        const briefing = form.querySelector('input[name="briefing"]:checked')?.value || "";
+        const kehadiran = form.querySelector('input[name="kehadiran"]:checked')?.value || "";
+
+        let firstInvalidId = null;
+
+        if (!namaLengkap) {
+          document.getElementById("err-namaLengkap").classList.remove("hidden");
+          firstInvalidId = firstInvalidId || "namaLengkap";
+        }
+        if (!/^(\+62|62|0)8[1-9][0-9]{7,11}$/.test(cleanWa)) {
+          document.getElementById("err-nomorWhatsApp").classList.remove("hidden");
+          firstInvalidId = firstInvalidId || "nomorWhatsApp";
+        }
+        if (!departemen) {
+          document.getElementById("err-departemen").classList.remove("hidden");
+          firstInvalidId = firstInvalidId || "departemen-list";
+        }
+        if (!jobdesc) {
+          document.getElementById("err-jobdesc").classList.remove("hidden");
+          firstInvalidId = firstInvalidId || "jobdesc-list";
+        }
+        if (!briefing) {
+          document.getElementById("err-briefing").classList.remove("hidden");
+          firstInvalidId = firstInvalidId || "err-briefing";
+        }
+        if (!kehadiran) {
+          document.getElementById("err-kehadiran").classList.remove("hidden");
+          firstInvalidId = firstInvalidId || "kehadiran-list";
+        }
+
+        if (firstInvalidId) {
+          showToast("Mohon lengkapi semua bagian formulir yang bertanda wajib (*).", "error");
+          document.getElementById(firstInvalidId)?.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        setSubmitLoading(true);
+
+        const randomDigits = Math.floor(1000 + Math.random() * 9000);
+        const kodeRegistrasi = `KRM-${randomDigits}`;
+        const waktuDaftar = new Date().toLocaleString("id-ID", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+
+        const payload = {
+          "Waktu Daftar": waktuDaftar,
+          "Kode Registrasi": kodeRegistrasi,
+          "1. Nama Lengkap": namaLengkap,
+          "2. Nomor WhatsApp": cleanWa,
+          "3. Departemen Di Kurma An-Nahl": departemen,
+          "4. Pilihan Jobdesc": jobdesc,
+          "5. Kesediaan Rapat Briefing": briefing,
+          "6. Kehadiran Sampai Jam Berapa": kehadiran
+        };
+
+        const scriptUrl = resolveScriptUrl();
+        let sentLive = false;
+
+        if (scriptUrl) {
+          try {
+            await fetch(scriptUrl, {
+              method: "POST",
+              mode: "no-cors",
+              headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+              },
+              body: JSON.stringify(payload)
+            });
+            sentLive = true;
+          } catch (error) {
+            console.error("Gagal mengirim data ke Google Apps Script:", error);
+            showToast("Terjadi gangguan jaringan saat mengirim ke Google Sheets. Silakan coba lagi.", "error");
+            setSubmitLoading(false);
+            return;
+          }
+        }
+
+        setSubmitLoading(false);
+
+        const receiptData = {
+          waktuDaftar,
+          kodeRegistrasi,
+          namaLengkap,
+          nomorWhatsApp: cleanWa,
+          departemen,
+          jobdesc,
+          briefing,
+          kehadiran,
+          sentLive
+        };
+
+        renderReceiptCard(receiptData);
+        showToast(
+          sentLive
+            ? "Pendaftaran berhasil dikirim langsung ke Google Sheets!"
+            : "Pendaftaran berhasil dicatat (Mode Pratinjau).",
+          "success"
+        );
+      });
+    }
+
+    function setSubmitLoading(isLoading) {
+      const btn = document.getElementById("btn-submit");
+      const icon = document.getElementById("submit-icon");
+      const spinner = document.getElementById("submit-spinner");
+      const text = document.getElementById("submit-text");
+
+      btn.disabled = isLoading;
+      if (isLoading) {
+        icon.classList.add("hidden");
+        spinner.classList.remove("hidden");
+        text.textContent = "Mengirim pendaftaran ke Google Sheets...";
+      } else {
+        icon.classList.remove("hidden");
+        spinner.classList.add("hidden");
+        text.textContent = "Kirim Pendaftaran";
+      }
+    }
+
+    function renderReceiptCard(data) {
+      currentReceipt = data;
+      document.getElementById("form-section").classList.add("hidden");
+      const receiptEl = document.getElementById("receipt-section");
+      receiptEl.classList.remove("hidden");
+
+      document.getElementById("rec-code").textContent = data.kodeRegistrasi;
+      document.getElementById("rec-time").textContent = `Waktu Daftar: ${data.waktuDaftar}`;
+      document.getElementById("rec-nama").textContent = data.namaLengkap;
+      document.getElementById("rec-wa").textContent = data.nomorWhatsApp;
+      document.getElementById("rec-dept").textContent = data.departemen;
+      document.getElementById("rec-job").textContent = data.jobdesc;
+      document.getElementById("rec-briefing").textContent = data.briefing;
+      document.getElementById("rec-kehadiran").textContent = data.kehadiran;
+
+      const modeNote = document.getElementById("rec-mode-note");
+      if (data.sentLive) {
+        modeNote.classList.add("hidden");
+      } else {
+        modeNote.classList.remove("hidden");
+      }
+
+      const summaryText = formatReceiptMessage(data);
+      document.getElementById("btn-wa-admin").href = `https://wa.me/?text=${encodeURIComponent(summaryText)}`;
+
+      receiptEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function formatReceiptMessage(d) {
+      return [
+        `*BUKTI PENDAFTARAN PANITIA DONOR DARAH — KURMA AN-NAHL*`,
+        `Kode Registrasi: *${d.kodeRegistrasi}*`,
+        `Waktu Daftar: ${d.waktuDaftar}`,
+        ``,
+        `1. Nama Lengkap: ${d.namaLengkap}`,
+        `2. Nomor WhatsApp: ${d.nomorWhatsApp}`,
+        `3. Departemen Di Kurma An-Nahl: ${d.departemen}`,
+        `4. Pilihan Jobdesc: ${d.jobdesc}`,
+        `5. Kesediaan Rapat Briefing: ${d.briefing}`,
+        `6. Kehadiran Sampai Jam Berapa: ${d.kehadiran}`
+      ].join("\n");
+    }
+
+    function copyReceipt() {
+      if (!currentReceipt) return;
+      copyToClipboard(formatReceiptMessage(currentReceipt), "Bukti pendaftaran berhasil disalin!");
+    }
+
+    function resetToNewRegistration() {
+      document.getElementById("registration-form").reset();
+      updateRadioVisualDots();
+      document.getElementById("receipt-section").classList.add("hidden");
+      const formEl = document.getElementById("form-section");
+      formEl.classList.remove("hidden");
+      formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // =========================================================================
+    // MODAL PENGATURAN ADMIN (DISCREET FOOTER TRIGGER)
+    // =========================================================================
+    function openAdminModal() {
+      document.getElementById("admin-script-url").value = resolveScriptUrl();
+      updateAdminStatusIndicators();
+      document.getElementById("admin-modal").classList.remove("hidden");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("admin-modal").classList.add("hidden");
+    }
+
+    // Tutup modal jika klik di luar kartu modal
+    document.getElementById("admin-modal").addEventListener("click", (e) => {
+      if (e.target.id === "admin-modal") {
+        closeAdminModal();
+      }
+    });
+
+    function saveAdminScriptUrl() {
+      const val = document.getElementById("admin-script-url").value.trim();
+      if (val && !val.startsWith("https://script.google.com/")) {
+        showToast("URL Apps Script harus diawali https://script.google.com/...", "error");
+        return;
+      }
+      localStorage.setItem(STORAGE_KEY_SCRIPT_URL, val);
+      updateAdminStatusIndicators();
+      showToast(
+        val ? "URL Google Apps Script berhasil disimpan!" : "URL Apps Script dihapus.",
+        "success"
+      );
+    }
+
+    function updateAdminStatusIndicators() {
+      const connected = Boolean(resolveScriptUrl());
+      const dot = document.getElementById("footer-status-dot");
+      const badge = document.getElementById("admin-status-badge");
+
+      if (connected) {
+        dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-500";
+        if (badge) {
+          badge.className = "text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-annahl-100 text-annahl-800";
+          badge.textContent = "Terhubung ke Google Sheets";
+        }
+      } else {
+        dot.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
+        if (badge) {
+          badge.className = "text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800";
+          badge.textContent = "Belum Terpasang";
+        }
+      }
+    }
+
+    async function sendTestRowToSheet() {
+      const url = document.getElementById("admin-script-url").value.trim() || resolveScriptUrl();
+      if (!url) {
+        showToast("Tempelkan URL Web App (/exec) terlebih dahulu.", "warning");
+        return;
+      }
+      if (!url.startsWith("https://script.google.com/")) {
+        showToast("Format URL Web App tidak valid.", "error");
+        return;
+      }
+
+      const btn = document.getElementById("btn-admin-test");
+      const oriText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span>Mengirim Data Tes...</span>`;
+
+      const testPayload = {
+        "Waktu Daftar": new Date().toLocaleString("id-ID", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        }),
+        "Kode Registrasi": "KRM-TEST",
+        "1. Nama Lengkap": "[TES ADMIN] Kurma An-Nahl",
+        "2. Nomor WhatsApp": "081200000000",
+        "3. Departemen Di Kurma An-Nahl": "D. BPH",
+        "4. Pilihan Jobdesc": "a. REGISTRASI",
+        "5. Kesediaan Rapat Briefing": "a. Setuju",
+        "6. Kehadiran Sampai Jam Berapa": "a. FULL TIME"
+      };
+
+      try {
+        await fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(testPayload)
+        });
+        saveAdminScriptUrl();
+        showToast("Data tes terkirim! Silakan cek sheet 'Pendaftar Panitia' di Google Sheets.", "success");
+      } catch (err) {
+        console.error(err);
+        showToast("Gagal mengirim data tes. Pastikan deployment diset ke 'Siapa saja (Anyone)'.", "error");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = oriText;
+      }
+    }
+
+    function copyShareableFormLink() {
+      const url = document.getElementById("admin-script-url").value.trim() || resolveScriptUrl();
+      if (!url) {
+        showToast("Simpan URL Apps Script terlebih dahulu sebelum menyalin link sebar.", "warning");
+        return;
+      }
+
+      if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+        const shareUrl = new URL(window.location.href);
+        shareUrl.searchParams.set("scriptUrl", url);
+        copyToClipboard(
+          shareUrl.toString(),
+          "Link formulir dengan ?scriptUrl=... berhasil disalin! Siap disebar ke grup WA."
+        );
+      } else {
+        copyToClipboard(
+          `?scriptUrl=${encodeURIComponent(url)}`,
+          "Parameter ?scriptUrl=... disalin! Tempelkan di belakang alamat web hosting Anda."
+        );
+      }
+    }
+
+    function copyCodeGs() {
+      const code = document.getElementById("code-gs-block")?.textContent || "";
+      copyToClipboard(code, "Kode Code.gs berhasil disalin!");
+      const lbl = document.getElementById("copy-gs-label");
+      lbl.textContent = "Tersalin!";
+      setTimeout(() => {
+        lbl.textContent = "Salin Kode Code.gs";
+      }, 2000);
+    }
+
+    // =========================================================================
+    // UTILITAS: CLIPBOARD, TOAST & ESCAPE HTML
+    // =========================================================================
+    function copyToClipboard(text, message) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) {
+          showToast(message, "success");
+        } else {
+          showToast("Gagal menyalin ke clipboard.", "warning");
+        }
+      } catch (_) {
+        showToast("Gagal menyalin teks.", "error");
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toast-container");
+      const borderColor = {
+        success: "border-annahl-500",
+        error: "border-blood-500",
+        warning: "border-amber-400",
+        info: "border-slate-400"
+      }[type] || "border-slate-400";
+
+      const toast = document.createElement("div");
+      toast.className = `pointer-events-auto bg-slate-900 text-white border-l-4 ${borderColor} rounded-2xl px-4 py-3 shadow-xl text-xs sm:text-sm font-medium flex items-center justify-between gap-3 animate-fade-up`;
+      toast.innerHTML = `
+        <span class="leading-snug">${escapeHtml(message)}</span>
+        <button type="button" class="text-slate-400 hover:text-white text-base leading-none cursor-pointer">&times;</button>
+      `;
+      toast.querySelector("button").addEventListener("click", () => toast.remove());
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        if (toast.parentElement) {
+          toast.style.opacity = "0";
+          toast.style.transition = "opacity 0.25s ease";
+          setTimeout(() => toast.remove(), 250);
+        }
+      }, 3800);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
